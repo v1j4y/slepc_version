@@ -1,11 +1,13 @@
         program main
         implicit none
-        integer::i
+        integer::i,tistart
+        real,allocatable::tval(:)
+        integer,allocatable::tcol(:)
+        integer::tcountcol
+        allocate (tcol(natomax))
+        allocate (tval(natomax))
         istart = 10
-
-        call unit()
+        tistart = 1
+        call unit(tistart,tcountcol,tcol,tval)
         
-        print *,countcol
-        print *,(col(i),i=1,natomax)
-        print *,(val(i),i=1,natomax)
         end

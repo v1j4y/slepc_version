@@ -1,4 +1,4 @@
-    subroutine unit()
+    subroutine unit(tistart,tcountcol,tcol,tval)
 
     BEGIN_DOC
     ! file units for writing
@@ -10,21 +10,26 @@
     integer :: iat,nbtots,iaa
     integer :: kkio,kkiok,n,nz
     integer,allocatable :: ideter1(:),ideter2(:),deti(:),detj(:)
+    integer::tcountcol,tistart
+    real,dimension(natomax)::tval
+    integer,dimension(natomax)::tcol
     real*8 :: xmat
     ! BEGIN_DOC
     ! provides unit of FIL33 & FIL44
     ! END_DOC
 
         allocate (ideter2(natomax))
+!       allocate (tcol(natomax))
+!       allocate (tval(natomax))
 
-        open(unit=2,file='FIL2')
-        open(unit=33,file='FIL33',form='formatted')
-
-
-
+    do i=1,natomax
+        tval(i)=0d0
+        tcol(i)=0d0
+    enddo
+        tcountcol=0
+        countcol=0
     unit_44=44
     unit_33=33
-    print *,"start and end",istart
         nnk=0
         xmat=0d0
         count=0
@@ -49,26 +54,16 @@
             	    deter(kkio)=ideter2(iat)
                       endif
                    enddo
-!                  write(6,*)'iaa',iaa
                    count+=1
 
-                   if(count.eq.istart)then
+                   if(count.eq.tistart)then
 
                    Touch deter
-!                  write(6,*)'yalt',(ytrou(l),l=1,natom)
                    call adress(deter,iaa)
-!                  write(6,*)'iaa',iaa
-                   write(2,*)(deter(kkiok),kkiok=1,natom),iaa
-!           call ylogic(deter,yalt,ytrou,yrep1)
                    call elem_diag(xmat)
-!    	       write(6,*)xmat/1.d0
                     countcol+=1
                     col(countcol)=iaa
-                    val(countcol)=xmat*2.0d0
-                   write(33,*)(xmat/1.0d0),count,count
-!                  nz=extra_diag()
-!                  write(6,*)nnk
-!                  nnk+=nz
+                    val(countcol)=xmat*1.0d0
                     
                   endif
 
@@ -77,6 +72,15 @@
              nnk+=rank
         close(33)
         close(44)
+
+        tcountcol=countcol
+        do i=1,22
+            if(col(i).ne.0)then
+            tcol(i)=col(i)-1
+            endif
+            tval(i)=val(i)
+        enddo
+
 
 
     end
