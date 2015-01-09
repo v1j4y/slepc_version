@@ -1,4 +1,4 @@
-    PROGRAM unit
+    subroutine unit()
 
     BEGIN_DOC
     ! file units for writing
@@ -24,6 +24,7 @@
 
     unit_44=44
     unit_33=33
+    print *,"start and end",istart
         nnk=0
         xmat=0d0
         count=0
@@ -50,6 +51,9 @@
                    enddo
 !                  write(6,*)'iaa',iaa
                    count+=1
+
+                   if(count.eq.istart)then
+
                    Touch deter
 !                  write(6,*)'yalt',(ytrou(l),l=1,natom)
                    call adress(deter,iaa)
@@ -58,10 +62,16 @@
 !           call ylogic(deter,yalt,ytrou,yrep1)
                    call elem_diag(xmat)
 !    	       write(6,*)xmat/1.d0
+                    countcol+=1
+                    col(countcol)=iaa
+                    val(countcol)=xmat*2.0d0
                    write(33,*)(xmat/1.0d0),count,count
 !                  nz=extra_diag()
 !                  write(6,*)nnk
 !                  nnk+=nz
+                    
+                  endif
+
                 enddo
              enddo
              nnk+=rank

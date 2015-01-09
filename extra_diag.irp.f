@@ -23,6 +23,7 @@
 	    ideter2(k)=deter(k)
          enddo
 	 if(yalt(ik)) then
+      print *,"enter extardiag"
 	    if (deter(ik1).eq.2) then
 	       ideter2(ik1)=1
 	       ideter2(ik2)=2
@@ -32,7 +33,7 @@
 	    endif
 	    call adress(ideter2,iaa2)
 	    call adress(deter,iaa)
-	    if(iaa.lt.iaa2) then
+!    if(iaa.lt.iaa2) then
 	       imat4=iaa
 	       jmat4=iaa2
 !  	       dmat4(isto4+1)=xj1+xeneJ(ik)*xbJ
@@ -41,8 +42,11 @@
 !              write(6,*)'testnt1',(nt1*nt2/2.d0)
                if(jmat4.le.(nt1*nt2))then
 	       call sto44(imat4,jmat4,dmat4)
-               extra_diag+=2
-               endif
+               countcol+=1
+               col(countcol)=jmat4
+               val(countcol)=dmat4
+               extra_diag+=1
+!              endif
 	    endif
          endif
 	 if(ytrou(ik)) then
@@ -65,7 +69,7 @@
             endif
 	    call adress(ideter2,iaa2)
 	    call adress(deter,iaa)
-	    if(iaa.lt.iaa2) then
+!    if(iaa.lt.iaa2) then
 	       imat4=iaa
 	       jmat4=iaa2
 	       ikmin=min(ik1,ik2)
@@ -86,24 +90,13 @@
                    endif
                  else
 
-                   if(jmat4-imat4.ne.nt2)then
                       call sto44(imat4,jmat4,dmat4)
-                      extra_diag+=2
-                   endif
-!                  if(jmat4-imat4.eq.10 )then
-!                    if(nnk.eq.rank)then
-!                      call sto44(imat4,jmat4,dmat4)
-!                      extra_diag+=2
-!                      write(6,*)'vijay countd',imat4,jmat4,dmat4
-!                    else
-!                      write(6,*)'vijay',imat4,jmat4,dmat4
-!                    endif
-!                  else
-!                    call sto44(imat4,jmat4,dmat4)
-!                    extra_diag+=2
-!                  endif
+               countcol+=1
+               col(countcol)=jmat4
+               val(countcol)=dmat4
+                      extra_diag+=1
 
-                 endif
+!                endif
 
                endif
 	    endif
