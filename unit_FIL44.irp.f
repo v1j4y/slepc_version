@@ -5,14 +5,14 @@
     END_DOC
 
     implicit none
-    integer :: i,j,k,ia1,ia2,l,m,chcind,chcval
+    integer :: i,j,k,ia1,ia2,l,m,chcind,chcval,ii
     integer :: count,unit_44,unit_33
     integer :: iat,nbtots,iaa
     integer :: kkio,kkiok,n,nz
-    integer,allocatable :: ideter1(:),ideter2(:),deti(:),detj(:)
+    integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:),tl1(:),tl2(:),tktyp(:)
     integer::tcountcol,tistart
-    real,dimension(natomax)::tval
-    integer,dimension(natomax)::tcol
+    real,dimension(32)::tval
+    integer,dimension(32)::tcol
     real*8 :: xmat
     ! BEGIN_DOC
     ! provides unit of FIL33 & FIL44
@@ -74,13 +74,11 @@
         close(44)
 
         tcountcol=countcol
-        do i=1,22
+        do i=1,32
             if(col(i).ne.0)then
             tcol(i)=col(i)-1
             endif
             tval(i)=val(i)
         enddo
-
-
-
+        print *,(tcol(i),i=1,32)
     end

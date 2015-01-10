@@ -26,7 +26,7 @@ BEGIN_PROVIDER [integer, natom]
       logical ykl(maxlien)
       logical yplac2(maxlien)
       logical yplac(maxlien)
-    integer,allocatable :: l1(:),l2(:),ktyp(:)
+!   integer,allocatable :: l1(:),l2(:),ktyp(:)
     integer :: ityp
     real*8,allocatable :: xjjz(:),xjjxy(:)
     real*8,allocatable :: xtt(:)
@@ -63,9 +63,6 @@ BEGIN_PROVIDER [integer, natom]
     allocate (xtt(maxlien))
     allocate (xjjz(maxlien))
     allocate (xjjxy(maxlien))
-    allocate (l1(maxlien))
-    allocate (l2(maxlien))
-    allocate (ktyp(maxlien))
 
     NAMELIST/hamilton/yham,FAM1,ntrou
     NAMELIST/clust/l1,l2,ktyp
@@ -95,26 +92,19 @@ BEGIN_PROVIDER [integer, natom]
       enddo
 !------------------Lecture Hamiltonien
 
-    read(5,hamilton)
-      if(.not.yham)then
-       write(6,*)'HAMILTONIEN DE HEISENBERG'
-      else
+       FAM1=.TRUE.
+       yham=.TRUE.
+       ntrou=1
        write(6,*)'HAMILTONIEN t-J'
        write(6,*)'Le nombre de trou est : ',ntrou
-      endif
 !---------------------------------------------
       write(6,*)' '
       write(6,*)' '
       write(6,*)'LECTURE DES ATOMES, DES LIAISONS, DES INTEGRALES'
       write(6,*)' '
       write(6,*)' '
-      do i=1,maxlien
-	 l1(i)=0
-	 l2(i)=0
-	 ktyp(i)=0
-      enddo
 !-----------Lecture 1ier voisin
-      read(5,clust)
+!     read(5,clust)
         jclust=jclust+1
 	if(yw)write(6,*)' '
 	write(6,*)'================ CLUSTER',jclust,'=================='
@@ -212,7 +202,11 @@ BEGIN_PROVIDER [integer, natom]
       enddo
 
 
-       read(5,integ)
+      ityp=3
+      xjjz=(/.1000d0,-0.8d0,0.000d0/)
+      xjjxy=(/.1000d0,-0.8d0,0.000d0/)
+      xtt=(/-1.0000d0,0.d0,0.0d0/)
+
        write(6,*)'Nombre de J differents',ityp
        do ikl=1,nlientot
          Ykl(ikl)=.false.
@@ -234,7 +228,23 @@ BEGIN_PROVIDER [integer, natom]
           ykl(il)=.true.
          endif
        enddo
-        read(5,param)
+        xbJ=0.00d0
+        xbT=0.0d0
+        xv1=0.0d0
+        xv2=0.0d0
+        xv3=0.0d0
+        xt1=-0.20d0
+        xt2=0.0d0
+        xj1=0.01d0
+        xj2=0.d0
+        xeneparJ=0.000d0
+        xeneparT=0.000d0
+        xeneperpJ=0.000d0
+        xeneperpT=0.000d0
+        xenediagJ=0.000d0
+        xenediagT=0.000d0
+        xspar=-0.00d0
+        xsperp=-0.00d0
        write(6,*)'coucoudslect3'
       write(6,*)'coucou'
 	write(6,*)'Parametres pour le t-J'
@@ -308,7 +318,17 @@ BEGIN_PROVIDER [integer, natom]
       iplac(1,kko),' ',iplac(2,kko),' ',iplac(3,kko),' et ',iplac(4,kko)
       enddo
 !===================================================================
-    read(5,infdia)
+    isz=0
+    IPREC=8
+    maxda2=20
+    NITER=280
+    ngao=100
+    nvec=8
+    numero=1
+    NES4=0
+    xseuil=1.0E-008
+    ysuiv=.FALSE.
+    yec=.TRUE.
       write(6,*)'Spin total',isz
       write(6,*)'Nombre de vecteurs demande',nvec
       write(6,*)'Nombre maximal d iterations de Davidson',niter
@@ -318,7 +338,6 @@ BEGIN_PROVIDER [integer, natom]
       write(6,*)'Variable Ysuiv (suivre le vecteur initial)',ysuiv
       write(6,*)'Seuil au dela duquel seront ecrits les vecteurs',xseuil
       write(6,*)'Option d ecriture des determinants sur FIL2',yec
-!     read(5,scsrev1)
 !     write(6,*)Emin
 !     write(6,*)Emax
 !     write(6,*)M0

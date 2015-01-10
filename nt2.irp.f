@@ -5,5 +5,5 @@ BEGIN_PROVIDER [integer, nt2]
     END_DOC
 
 
-    call combin(idet2(1,nt2+1),natrest,ial0,nt2,22,jrangmax)
+    call combin(idet2(1,nt2+1),natrest,ial0,nt2,32,jrangmax)
 END_PROVIDER
