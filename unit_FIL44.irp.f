@@ -33,8 +33,11 @@
         nnk=0
         xmat=0d0
         count=0
-             do i=1,nt1
-                do k=1,nt2
+!            do i=1,nt1
+!               do k=1,nt2
+
+             i=1+istart/nt2
+             k=mod(istart , nt2)
                    do kkio=1,natom
                       deter(kkio)=2
                    enddo
@@ -56,7 +59,8 @@
                    enddo
                    count+=1
 
-                   if(count.eq.tistart)then
+!                  if(count.eq.tistart)then
+                   print *,"i=",i,"k=",k,"count=",count
 
                    Touch deter
                    call adress(deter,iaa)
@@ -65,10 +69,10 @@
                     col(countcol)=iaa
                     val(countcol)=xmat*1.0d0
                     
-                  endif
+!                 endif
 
-                enddo
-             enddo
+!               enddo
+!            enddo
              nnk+=rank
         close(33)
         close(44)
