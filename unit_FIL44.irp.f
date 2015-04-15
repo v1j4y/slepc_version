@@ -38,32 +38,36 @@
 
              i=1+tistart/nt2
              k=1+mod(tistart , nt2)
-                   do kkio=1,natom
-                      deter(kkio)=2
-                   enddo
-                   do l=1,ntrou
-                      deter(idet1(l,i))=3
-                   enddo
-                   do m=1,natrest
-                      ideter2(m)=2
-                   enddo
-                   do n=1,ial0
-                      ideter2(idet2(n,k))=1
-                   enddo
-                   iat=0
-                   do kkio=1,natom
-                      if(deter(kkio).ne.3)then
-            	    iat=iat+1
-            	    deter(kkio)=ideter2(iat)
-                      endif
-                   enddo
-                   count+=1
+!                  do kkio=1,natom
+!                     deter(kkio)=2
+!                  enddo
+!                  do l=1,ntrou
+!                     deter(idet1(l,i))=3
+!                  enddo
+!                  do m=1,natrest
+!                     ideter2(m)=2
+!                  enddo
+!                  do n=1,ial0
+!                     ideter2(idet2(n,k))=1
+!                  enddo
+!                  iat=0
+!                  do kkio=1,natom
+!                     if(deter(kkio).ne.3)then
+!           	    iat=iat+1
+!           	    deter(kkio)=ideter2(iat)
+!                     endif
+!                  enddo
+!                  count+=1
 
 !                  if(count.eq.tistart)then
-                   print *,"i=",i,"k=",k,"count=",count
+!                  print *,"i=",i,"k=",k,"count=",count
 
+                   call getdet(tistart,ideter2)
+                   print *,'idet2:'
+                   write(6,*)(ideter2(i),i=1,natom)
+                   deter=ideter2
                    Touch deter
-                   call adress(deter,iaa)
+!                  call adress(deter,iaa)
                    call elem_diag(xmat)
                     countcol+=1
                     col(countcol)=iaa

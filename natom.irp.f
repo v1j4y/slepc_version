@@ -14,6 +14,8 @@ BEGIN_PROVIDER [integer, natom]
 &BEGIN_PROVIDER [real*8, Emin]
 &BEGIN_PROVIDER [real*8, Emax]
 &BEGIN_PROVIDER [integer, M0]
+&BEGIN_PROVIDER [integer, nalpha]
+&BEGIN_PROVIDER [integer, nbeta]
     BEGIN_DOC
     ! read data
     END_DOC
@@ -348,4 +350,20 @@ BEGIN_PROVIDER [integer, natom]
       endif
       write(6,*)'=======nombre de centres de spin alpha=====',ial0
       natrest=natom-ntrou
+
+    !C calculating nalpha and nbeta
+    if(mod(natom-ntrou+2*isz,2).eq.0)then
+        nalpha=(natom-ntrou+2*isz)/2
+        nbeta=(natom -ntrou-2*isz)/2
+        if(((natom-ntrou)/2).eq.isz)then
+            nbeta=0
+        endif
+    else
+        nalpha=(natom-ntrou+2*isz+1)/2
+        nbeta=(natom -ntrou-2*isz-1)/2
+        if(((natom-ntrou+1)/2).eq.isz)then
+            nbeta=0
+        endif
+    endif
+
 END_PROVIDER

@@ -17,8 +17,6 @@
       yw=.FALSE.
       extra_diag=0
       do ik=1,nlientot
-         ik1=iliatom1(ik)
-         ik2=iliatom2(ik)
          do k=1,natom
 	    ideter2(k)=deter(k)
          enddo
@@ -30,8 +28,8 @@
 	       ideter2(ik1)=2
 	       ideter2(ik2)=1
 	    endif
-	    call adress(ideter2,iaa2)
-	    call adress(deter,iaa)
+	    call adr(ideter2,iaa2)
+	    call adr(deter,iaa)
 	       imat4=iaa
 	       jmat4=iaa2
    	       dmat4=xjz(ik)
@@ -60,8 +58,8 @@
 	        ideter2(ik2)=3
 	      endif
             endif
-	    call adress(ideter2,iaa2)
-	    call adress(deter,iaa)
+	    call adr(ideter2,iaa2)
+	    call adr(deter,iaa)
 	       imat4=iaa
 	       jmat4=iaa2
 	       ikmin=min(ik1,ik2)
