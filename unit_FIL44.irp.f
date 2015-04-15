@@ -36,8 +36,8 @@
 !            do i=1,nt1
 !               do k=1,nt2
 
-             i=1+istart/nt2
-             k=mod(istart , nt2)
+             i=1+tistart/nt2
+             k=1+mod(tistart , nt2)
                    do kkio=1,natom
                       deter(kkio)=2
                    enddo
@@ -74,8 +74,8 @@
 !               enddo
 !            enddo
              nnk+=rank
-        close(33)
-        close(44)
+!       close(33)
+!       close(44)
 
         tcountcol=countcol
         do i=1,32

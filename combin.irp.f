@@ -1,5 +1,5 @@
       SUBROUTINE COMBIN(NS1,N,M,NT,MD,ND)
-      INTEGER*4 NS1(MD,ND)
+      INTEGER NS1(MD,ND)
       INTEGER :: i,j,MMJ1,J1
       I=1
       DO J=1,M
