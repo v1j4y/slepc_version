@@ -14,6 +14,10 @@
     real,dimension(32)::tval
     integer,dimension(32)::tcol
     real*8 :: xmat
+        integer :: ik,imat4,iaa2,iik
+        integer :: ik1,ik2,jmat4,IC,ikmax,ikmin
+        real*8 :: dmat4
+        logical :: yw
     ! BEGIN_DOC
     ! provides unit of FIL33 & FIL44
     ! END_DOC
@@ -33,53 +37,21 @@
         nnk=0
         xmat=0d0
         count=0
-!            do i=1,nt1
-!               do k=1,nt2
 
              i=1+tistart/nt2
              k=1+mod(tistart , nt2)
-!                  do kkio=1,natom
-!                     deter(kkio)=2
-!                  enddo
-!                  do l=1,ntrou
-!                     deter(idet1(l,i))=3
-!                  enddo
-!                  do m=1,natrest
-!                     ideter2(m)=2
-!                  enddo
-!                  do n=1,ial0
-!                     ideter2(idet2(n,k))=1
-!                  enddo
-!                  iat=0
-!                  do kkio=1,natom
-!                     if(deter(kkio).ne.3)then
-!           	    iat=iat+1
-!           	    deter(kkio)=ideter2(iat)
-!                     endif
-!                  enddo
-!                  count+=1
-
-!                  if(count.eq.tistart)then
-!                  print *,"i=",i,"k=",k,"count=",count
 
                    call getdet(tistart,ideter2)
                    print *,'idet2:'
                    write(6,*)(ideter2(i),i=1,natom)
+                   print *,'done with idet2:'
                    deter=ideter2
                    Touch deter
+                   print *,'touched deter'
 !                  call adress(deter,iaa)
                    call elem_diag(xmat)
-                    countcol+=1
-                    col(countcol)=iaa
-                    val(countcol)=xmat*1.0d0
-                    
-!                 endif
-
-!               enddo
-!            enddo
-             nnk+=rank
-!       close(33)
-!       close(44)
+                   print *,'called elem_diag'
+                   call extra_diag()
 
         tcountcol=countcol
         do i=1,32

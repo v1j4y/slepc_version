@@ -16,7 +16,7 @@ BEGIN_PROVIDER [logical, yalt,(maxlien)]
         integer :: itypl(maxlien)
         logical :: yw
 
-!       write(6,*)'in elem_diag'
+        write(6,*)'in elem_diag'
 
 !---mise a zero
             nalt=0

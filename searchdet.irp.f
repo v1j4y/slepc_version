@@ -25,7 +25,7 @@ subroutine searchdet(det,add,deth,addh)
             do while (i.le.(nt1))
                 if(a.eq.deth)then
                     addh=i-2
-                    print *,"leave",addh,ah
+                    print *,"leave",addh,addh
                     EXIT
                 endif
 

@@ -1,4 +1,4 @@
-        integer function extra_diag()
+        subroutine extra_diag()
         implicit none
 
         integer :: i,ik,imat4,iaa2,iik,iaa
@@ -15,8 +15,9 @@
       allocate (ideter2(natomax))
 
       yw=.FALSE.
-      extra_diag=0
       do ik=1,nlientot
+          ik1=iliatom1(ik)
+          ik2=iliatom2(ik)
          do k=1,natom
 	    ideter2(k)=deter(k)
          enddo
@@ -37,7 +38,6 @@
                countcol+=1
                col(countcol)=jmat4
                val(countcol)=dmat4
-               extra_diag+=1
 	       endif
          endif
 	 if(ytrou(ik)) then
@@ -73,10 +73,9 @@
                 countcol+=1
                 col(countcol)=jmat4
                 val(countcol)=dmat4
-                      extra_diag+=1
               endif
          endif
       enddo
 
     return
-    end function extra_diag
+    end

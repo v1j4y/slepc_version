@@ -4,7 +4,6 @@ BEGIN_PROVIDER [integer, nnk]
     BEGIN_DOC
     ! provides nnk = total number of non zero elements in H
     END_DOC
-    integer :: extra_diag
-    
-    nnk+=extra_diag()
+
+    nnk=0
 END_PROVIDER
