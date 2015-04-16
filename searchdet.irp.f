@@ -5,11 +5,13 @@ subroutine searchdet(det,add,deth,addh)
     ! then find the posistion of the determinant given and
     ! return it's position in add.
     END_DOC
-    integer,INTENT(INOUT)::det
-    integer,INTENT(INOUT)::add
-    integer,INTENT(INOUT)::deth
-    integer,INTENT(INOUT)::addh
-    integer::i,a,const
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::det
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::addh
+    integer(kind=selected_int_kind(16))::a
+    integer(kind=selected_int_kind(16))::i
+    integer::const
     i=1
     a=0
     add=0

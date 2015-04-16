@@ -31,6 +31,10 @@
 	    endif
 	    call adr(ideter2,iaa2)
 	    call adr(deter,iaa)
+	       print *,iaa,iaa2,'this is iaa,iaa2'
+	       print *,(ideter2(iik),iik=1,natom)
+	       print *,(deter(iik),iik=1,natom)
+	       print *,iaa,iaa2,'this is iaa,iaa2'
 	       imat4=iaa
 	       jmat4=iaa2
    	       dmat4=xjz(ik)

@@ -52,6 +52,9 @@
                    call elem_diag(xmat)
                    print *,'called elem_diag'
                    call extra_diag()
+        do i=1,nlientot
+            print *,yalt(i)
+        enddo
 
         tcountcol=countcol
         do i=1,32

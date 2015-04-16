@@ -5,8 +5,8 @@ subroutine conv(ideter,det,deth)
     ! format into the new one and returns the determinant.
     END_DOC
     integer,INTENT(INOUT)::ideter(natomax)
-    integer,INTENT(INOUT)::det
-    integer,INTENT(INOUT)::deth
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::det
+    integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
     integer::i
     det=0
     deth=0
@@ -17,6 +17,4 @@ subroutine conv(ideter,det,deth)
             deth=IBSET(deth,i-1)
         endif
     enddo
-            print *,'det=',det
-            print *,'deth=',deth
 end

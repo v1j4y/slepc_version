@@ -5,8 +5,9 @@ subroutine getdet(add,ideter)
     ! the traditional form given its address
     END_DOC
     integer,INTENT(INOUT)::ideter(natomax)
-    integer,INTENT(IN)::add
-    integer::i,const,ia,ib,deta,detb
+    integer(kind=selected_int_kind(16)),INTENT(IN)::add
+    integer(kind=selected_int_kind(16))::deta,detb
+    integer::i,const,ia,ib
 
     ib = MOD(add,nt2)
     if(MOD(add,nt2).eq.0)then
