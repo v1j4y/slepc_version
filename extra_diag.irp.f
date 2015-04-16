@@ -36,7 +36,7 @@
 	       imat4=iaa
 	       jmat4=iaa2
    	       dmat4=xjz(ik)
-               if(jmat4.le.(nt1*nt2))then
+               if(jmat4.le.(nt1*nt2) .and. dmat4 .ne. 0d0)then
                countcol+=1
                col(countcol)=jmat4
                val(countcol)=dmat4
@@ -71,7 +71,7 @@
 		    if(deter(iik).ne.3)IC=IC+1
 	       enddo
   	       dmat4=(xt(ik))*(-1)**(IC)
-               if(jmat4.le.(nt1*nt2))then
+               if(jmat4.le.(nt1*nt2) .and. dmat4 .ne. 0d0)then
                 countcol+=1
                 col(countcol)=jmat4
                 val(countcol)=dmat4

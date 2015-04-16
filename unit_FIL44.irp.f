@@ -7,12 +7,14 @@
     implicit none
     integer :: i,j,k,ia1,ia2,l,m,chcind,chcval,ii
     integer :: count,unit_44,unit_33
-    integer :: iat,nbtots,iaa
+    integer :: iat,nbtots
+    integer(kind=selected_int_kind(16))::iaa
     integer :: kkio,kkiok,n,nz
-    integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:),tl1(:),tl2(:),tktyp(:)
-    integer::tcountcol,tistart
-    real,dimension(32)::tval
-    integer,dimension(32)::tcol
+    integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
+    integer(kind=selected_int_kind(16)),dimension(42) ::tl1,tl2,tktyp
+    integer(kind=selected_int_kind(16))::tcountcol,tistart
+    real,dimension(52)::tval
+    integer(kind=selected_int_kind(16)),dimension(52)::tcol
     real*8 :: xmat
         integer :: ik,imat4,iaa2,iik
         integer :: ik1,ik2,jmat4,IC,ikmax,ikmin
@@ -29,6 +31,8 @@
     do i=1,natomax
         tval(i)=0d0
         tcol(i)=0d0
+        col(i)=0d0
+        val(i)=0d0
     enddo
         tcountcol=0
         countcol=0
@@ -43,17 +47,24 @@
 
             call getdet(tistart,ideter2)
             deter=ideter2
-            write(6,*)(deter(i),i=1,natom)
             Touch deter
+            call adr(deter,iaa)
             call elem_diag(xmat)
+            countcol+=1
+            col(countcol)=iaa
+            val(countcol)=xmat*1.0d0
+
             call extra_diag()
 
         tcountcol=countcol
-        do i=1,32
-            if(val(i).ne.0d0)then
-            tcol(i)=col(i)
+        do i=1,52
+            if(col(i).ne.0)then
+                if(val(i) .ne. 0 .or. col(i).eq.tistart)then
+                    tcol(i)=col(i)
+                    tval(i)=val(i)
+                endif
             endif
-            tval(i)=val(i)
         enddo
-        print *,(tcol(i),i=1,32)
+!       print *,tistart
+!       print *,(tcol(i),i=1,42)
     end
