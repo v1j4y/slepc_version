@@ -38,28 +38,20 @@
         xmat=0d0
         count=0
 
-             i=1+tistart/nt2
-             k=1+mod(tistart , nt2)
+            i=1+tistart/nt2
+            k=1+mod(tistart , nt2)
 
-                   call getdet(tistart,ideter2)
-                   print *,'idet2:'
-                   write(6,*)(ideter2(i),i=1,natom)
-                   print *,'done with idet2:'
-                   deter=ideter2
-                   Touch deter
-                   print *,'touched deter'
-!                  call adress(deter,iaa)
-                   call elem_diag(xmat)
-                   print *,'called elem_diag'
-                   call extra_diag()
-        do i=1,nlientot
-            print *,yalt(i)
-        enddo
+            call getdet(tistart,ideter2)
+            deter=ideter2
+            write(6,*)(deter(i),i=1,natom)
+            Touch deter
+            call elem_diag(xmat)
+            call extra_diag()
 
         tcountcol=countcol
         do i=1,32
-            if(col(i).ne.0)then
-            tcol(i)=col(i)-1
+            if(val(i).ne.0d0)then
+            tcol(i)=col(i)
             endif
             tval(i)=val(i)
         enddo

@@ -15,7 +15,6 @@ subroutine searchdet(det,add,deth,addh)
     i=1
     a=0
     add=0
-    print *,"enter"
     const=0
 
     If(ntrou.ge.1)then
@@ -24,10 +23,9 @@ subroutine searchdet(det,add,deth,addh)
             a=0
             addh=0
             i=1
-            do while (i.le.(nt1))
+            do while (i.le.(2*nt1))
                 if(a.eq.deth)then
                     addh=i-2
-                    print *,"leave",addh,addh
                     EXIT
                 endif
 
@@ -58,11 +56,9 @@ subroutine searchdet(det,add,deth,addh)
             if(a.eq.1)then
                add=i
                count=-1
-               print *,"le",add,a
                EXIT
             else
                add=i
-               print *,"le",add,a
                count=-1
                EXIT
             endif

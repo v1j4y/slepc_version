@@ -15,9 +15,6 @@ subroutine getdet(add,ideter)
     endif
     ia = (add-ib)/nt2
     ia = nt1 - ia
-    print *,'in getdet'
-    print *,ia,ib,add,MOD(add,nt2),add/nt2
-    print *,natom,ntrou,nalpha,nbeta
     ideter=1
     const=0
     detb=0
@@ -30,7 +27,7 @@ subroutine getdet(add,ideter)
             const=0
         enddo
         i+=1
-        write(6,14)detb,detb
+!       write(6,14)detb,detb
     enddo
     i=1
     do while (i.le.(ia))
@@ -40,7 +37,7 @@ subroutine getdet(add,ideter)
             const=0
         enddo
         i+=1
-        write(6,14)deta,deta
+!       write(6,14)deta,deta
     enddo
     const=0
     do i=0,(natom/2) - 1

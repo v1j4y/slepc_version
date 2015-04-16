@@ -1,5 +1,4 @@
-BEGIN_PROVIDER [integer, nt1]
-&BEGIN_PROVIDER [integer, idet1,(natomax,jrangmax)]
+BEGIN_PROVIDER [integer(kind=selected_int_kind(16)), nt1]
     BEGIN_DOC
     ! calculates the number of det the 3's moving
     END_DOC

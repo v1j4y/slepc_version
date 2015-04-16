@@ -6,7 +6,7 @@ subroutine adr(ideter,add)
     ! It searches in a list of generated determinants and
     ! matches the given determinant.
     END_DOC
-    integer,INTENT(INOUT)::ideter(natom)
+    integer,INTENT(INOUT)::ideter(natomax)
     integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
     integer(kind=selected_int_kind(16))::det,i,deth,addh,detnew
     integer::count
@@ -26,7 +26,7 @@ subroutine adr(ideter,add)
     enddo
     det=detnew
     call searchdet(det,add,deth,addh)
-    add = add + (nt1-addh)*(nt2)
+    add = add + (2*nt1-addh)*(nt2)
 
 
 10  FORMAT(B64,I8,F8.2)

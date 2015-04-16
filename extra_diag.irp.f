@@ -1,8 +1,10 @@
         subroutine extra_diag()
         implicit none
 
-        integer :: i,ik,imat4,iaa2,iik,iaa
-        integer :: ik1,ik2,jmat4,IC,k,ikmax,ikmin
+        integer(kind=selected_int_kind(16)) :: iaa,iaa2
+        integer(kind=selected_int_kind(16)) :: imat4,jmat4
+        integer :: i,ik,iik
+        integer :: ik1,ik2,IC,k,ikmax,ikmin
         integer,allocatable :: ideter2(:)
         real*8 :: dmat4
         logical :: yw
@@ -31,10 +33,6 @@
 	    endif
 	    call adr(ideter2,iaa2)
 	    call adr(deter,iaa)
-	       print *,iaa,iaa2,'this is iaa,iaa2'
-	       print *,(ideter2(iik),iik=1,natom)
-	       print *,(deter(iik),iik=1,natom)
-	       print *,iaa,iaa2,'this is iaa,iaa2'
 	       imat4=iaa
 	       jmat4=iaa2
    	       dmat4=xjz(ik)
