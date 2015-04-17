@@ -1,4 +1,4 @@
-        subroutine extra_diag()
+        subroutine extra_diag(iaa)
         implicit none
 
         integer(kind=selected_int_kind(16)) :: iaa,iaa2
@@ -32,7 +32,6 @@
 	       ideter2(ik2)=1
 	    endif
 	    call adr(ideter2,iaa2)
-	    call adr(deter,iaa)
 	       imat4=iaa
 	       jmat4=iaa2
    	       dmat4=xjz(ik)
@@ -61,7 +60,6 @@
 	      endif
             endif
 	    call adr(ideter2,iaa2)
-	    call adr(deter,iaa)
 	       imat4=iaa
 	       jmat4=iaa2
 	       ikmin=min(ik1,ik2)

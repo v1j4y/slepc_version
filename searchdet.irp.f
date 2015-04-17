@@ -29,11 +29,10 @@ subroutine searchdet(det,add,deth,addh)
                     EXIT
                 endif
 
-                const=1
                 i+=1
-                do while(popcnt(a).ne.ntrou .or. const==1)
+                a+=1
+                do while(popcnt(a).ne.ntrou)
                     a+=1
-                    const=0
                 enddo
             enddo
             if(a.eq.deth)then
@@ -64,12 +63,11 @@ subroutine searchdet(det,add,deth,addh)
             endif
         endif
 
-        const=1
         i+=1
+        a+=1
 !C      write(6,16)a,a,i-2
-        do while(popcnt(a).ne.nbeta .or. const==1)
+        do while(popcnt(a).ne.nbeta)
             a+=1
-            const=0
         enddo
     enddo
     if(a.eq.det .and. count.ne.-1)then

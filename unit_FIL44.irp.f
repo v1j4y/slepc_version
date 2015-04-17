@@ -54,7 +54,7 @@
             col(countcol)=iaa
             val(countcol)=xmat*1.0d0
 
-            call extra_diag()
+            call extra_diag(iaa)
 
         tcountcol=countcol
         do i=1,52
