@@ -12,7 +12,7 @@ BEGIN_PROVIDER [integer, natomax]
     END_DOC
 
     implicit none
-    natomax=42
+    natomax=52
     jrangmax=10705432
     maxial=20
     maxlien=42

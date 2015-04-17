@@ -1,4 +1,4 @@
-subroutine adr(ideter,add)
+subroutine adrfull()
     implicit none
     BEGIN_DOC
     ! this subroutine provides the address of a detrminant 
@@ -6,16 +6,19 @@ subroutine adr(ideter,add)
     ! It searches in a list of generated determinants and
     ! matches the given determinant.
     END_DOC
-    integer,INTENT(INOUT)::ideter(natomax)
-    integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
+    integer,dimension(natomax)::ideter
+    integer(kind=selected_int_kind(16))::add
     integer(kind=selected_int_kind(16))::det,deth,addh,detnew
     integer::count,i,j
 
     det=0
     detnew=0
     deth=0
+    print *,'in adrfull'
+    do j=1,detfound
+    detnew=0
     count=0
-    print *,'in adr'
+    ideter=foundet(:,j)
     call conv(ideter,det,deth)
     Do i=0,natom-1
         if(BTEST(deth,i))then
@@ -26,8 +29,22 @@ subroutine adr(ideter,add)
         endif
     enddo
     det=detnew
-    call searchdet(det,add,deth,addh)
+        foundadd(j,1)=det
+        foundadd(j,3)=j
+        foundaddh(j,1)=deth
+        foundaddh(j,3)=j
+        write(6,16)foundadd(j,1),foundadd(j,2),foundadd(j,3)
+        write(6,16)foundaddh(j,1),foundaddh(j,2),foundaddh(j,3)
+    enddo
+    call sort()
+    call searchdetfull()
+    call desort()
+    do i=1,detfound
+        add = foundadd(i,2)
+        addh = foundaddh(i,2)
         add = add + (2*nt1-addh)*(nt2)
+        foundetadr(i)=add
+    enddo
 
 
 10  FORMAT(B64,I8,F8.2)

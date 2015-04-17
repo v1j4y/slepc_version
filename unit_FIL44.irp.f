@@ -65,6 +65,6 @@
                 endif
             endif
         enddo
-!       print *,tistart
-!       print *,(tcol(i),i=1,42)
+        print *,tistart
+        print *,(tcol(i),i=1,52)
     end

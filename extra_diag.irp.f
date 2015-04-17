@@ -33,9 +33,13 @@
 	       ideter2(ik2)=1
 	    endif
    	       dmat4=xjz(ik)
+               if(dmat4.ne.0d0)then
             count+=1
+            print *,'',dmat4
+            print *,(ideter2(i),i=1,natom)
             foundet(:,count)=ideter2
-            foundetadr(count,1)=dmat4
+            foundetdmat(count)=dmat4
+            endif
          endif
 	 if(ytrou(ik)) then
 	    if(deter(ik2).eq.3)then
@@ -62,18 +66,25 @@
 		    if(deter(iik).ne.3)IC=IC+1
 	       enddo
   	       dmat4=(xt(ik))*(-1)**(IC)
+               if(dmat4.ne.0d0)then
             count+=1
+            print *,'',dmat4
+            print *,(ideter2(i),i=1,natom)
             foundet(:,count)=ideter2
-            foundetadr(count,1)=dmat4
+            foundetdmat(count)=dmat4
+            endif
          endif
       enddo
 
       detfound=count
       Touch foundet foundetadr detfound foundadd foundaddh
+      call adrfull()
       do i=1,count
 	       imat4=iaa
-	       jmat4=foundetadr(i,2)
-               dmat4=foundetadr(i,1)
+	       jmat4=foundetadr(i)
+               dmat4=foundetdmat(i)
+               print *,'det',foundetadr(i),foundetdmat(i)
+               print *,(foundet(ik,i),ik=1,natom)
                if(jmat4.le.(nt1*nt2) .and. dmat4 .ne. 0d0)then
                 countcol+=1
                 col(countcol)=jmat4
