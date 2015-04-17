@@ -35,8 +35,6 @@
    	       dmat4=xjz(ik)
                if(dmat4.ne.0d0)then
             count+=1
-            print *,'',dmat4
-            print *,(ideter2(i),i=1,natom)
             foundet(:,count)=ideter2
             foundetdmat(count)=dmat4
             endif
@@ -68,8 +66,6 @@
   	       dmat4=(xt(ik))*(-1)**(IC)
                if(dmat4.ne.0d0)then
             count+=1
-            print *,'',dmat4
-            print *,(ideter2(i),i=1,natom)
             foundet(:,count)=ideter2
             foundetdmat(count)=dmat4
             endif
@@ -83,8 +79,6 @@
 	       imat4=iaa
 	       jmat4=foundetadr(i)
                dmat4=foundetdmat(i)
-               print *,'det',foundetadr(i),foundetdmat(i)
-               print *,(foundet(ik,i),ik=1,natom)
                if(jmat4.le.(nt1*nt2) .and. dmat4 .ne. 0d0)then
                 countcol+=1
                 col(countcol)=jmat4

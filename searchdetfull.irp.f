@@ -6,9 +6,9 @@ subroutine searchdetfull()
     ! return it's position in add.
     END_DOC
 !   integer(kind=selected_int_kind(16)),INTENT(INOUT)::foundetadr(maxlien,4)
-!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
+    integer(kind=selected_int_kind(16))::add
 !   integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
-!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::addh
+    integer(kind=selected_int_kind(16))::addh
     integer(kind=selected_int_kind(16))::a
     integer(kind=selected_int_kind(16))::i
     integer::const,count
@@ -27,8 +27,12 @@ subroutine searchdetfull()
                 if(a.eq.foundaddh(count,1))then
                     addh=i-1
                     foundaddh(count,2)=addh
-                    if(count.eq.detfound)EXIT
                     count+=1
+                    do while(count .le. detfound .and. a .eq. foundaddh(count,1))
+                        foundaddh(count,2)=addh
+                        count+=1
+                    enddo
+                    if(count.ge.detfound)EXIT
                 endif
 
                 i+=1
@@ -43,18 +47,24 @@ subroutine searchdetfull()
             if(a.eq.foundaddh(count,1))then
             addh=i-1
             foundaddh(count,2)=addh
+                    count+=1
+                    do while(count .le. detfound .and. a .eq. foundaddh(count,1))
+                        foundaddh(count,2)=addh
+                        count+=1
+                    enddo
             endif
 
     endif
 
     !C if det=0 then exit
     a=0
-    i=0
+    i=1
     count=1
     const=0
     if(a.eq.foundadd(count,1))then
     add=1
-    Return
+               foundadd(count,2)=add
+               count+=1
     endif
 
     do while (i.le.(nt2))
@@ -68,7 +78,7 @@ subroutine searchdetfull()
                endif
                count+=1
             else
-               add=i
+               add=i-1
                foundadd(count,2)=add
                if(count.eq.detfound)then
                const=-1
@@ -85,10 +95,7 @@ subroutine searchdetfull()
             a+=1
         enddo
     enddo
-    if(a.eq.foundadd(count,1) .and. const.ne.-1)then
-    add=i-1
-    foundadd(count,2)=add
-    endif
+
     
 
 10  FORMAT(B64,I8,F8.2)

@@ -15,7 +15,6 @@ subroutine adr(ideter,add)
     detnew=0
     deth=0
     count=0
-    print *,'in adr'
     call conv(ideter,det,deth)
     Do i=0,natom-1
         if(BTEST(deth,i))then

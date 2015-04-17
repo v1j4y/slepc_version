@@ -20,10 +20,10 @@ subroutine desort()
                 det = foundadd(i,1)
                 foundadd(i,1) = foundadd(j,1)
                 foundadd(j,1) = det
-                add = foundaddh(i,2)
+                add = foundadd(i,2)
                 foundadd(i,2) = foundadd(j,2)
                 foundadd(j,2) = add
-                ord = foundaddh(i,3)
+                ord = foundadd(i,3)
                 foundadd(i,3) = foundadd(j,3)
                 foundadd(j,3) = ord
             endif

@@ -14,7 +14,6 @@ subroutine adrfull()
     det=0
     detnew=0
     deth=0
-    print *,'in adrfull'
     do j=1,detfound
     detnew=0
     count=0
@@ -33,8 +32,6 @@ subroutine adrfull()
         foundadd(j,3)=j
         foundaddh(j,1)=deth
         foundaddh(j,3)=j
-        write(6,16)foundadd(j,1),foundadd(j,2),foundadd(j,3)
-        write(6,16)foundaddh(j,1),foundaddh(j,2),foundaddh(j,3)
     enddo
     call sort()
     call searchdetfull()
