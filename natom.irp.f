@@ -96,7 +96,7 @@ BEGIN_PROVIDER [integer, natom]
 
        FAM1=.TRUE.
        yham=.TRUE.
-       ntrou=1
+       ntrou=4
        write(6,*)'HAMILTONIEN t-J'
        write(6,*)'Le nombre de trou est : ',ntrou
 !---------------------------------------------
