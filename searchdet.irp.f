@@ -1,21 +1,22 @@
-subroutine searchdet(det,add,deth,addh)
+subroutine searchdet()
     BEGIN_DOC
     ! this subroutine is at the heart of the idea
     ! it will generate all the determinants in a fixed order
     ! then find the posistion of the determinant given and
     ! return it's position in add.
     END_DOC
-    integer(kind=selected_int_kind(16)),INTENT(INOUT)::det
-    integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
-    integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
-    integer(kind=selected_int_kind(16)),INTENT(INOUT)::addh
+!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::foundetadr(maxlien,4)
+!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
+!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
+!   integer(kind=selected_int_kind(16)),INTENT(INOUT)::addh
     integer(kind=selected_int_kind(16))::a
     integer(kind=selected_int_kind(16))::i
-    integer::const
+    integer::const,count
     i=1
     a=0
     add=0
     const=0
+    count=1
 
     If(ntrou.ge.1)then
 
@@ -24,9 +25,11 @@ subroutine searchdet(det,add,deth,addh)
             addh=0
             i=1
             do while (i.le.(2*nt1))
-                if(a.eq.deth)then
+                if(a.eq.foundaddh(count,1))then
                     addh=i-2
-                    EXIT
+                    foundaddh(count,2)=addh
+                    if(count.eq.detfound)EXIT
+                    count+=1
                 endif
 
                 i+=1
@@ -35,8 +38,9 @@ subroutine searchdet(det,add,deth,addh)
                     a+=1
                 enddo
             enddo
-            if(a.eq.deth)then
+            if(a.eq.foundaddh(count,1))then
             addh=i-1
+            foundaddh(count,2)=addh
             endif
 
     endif
@@ -44,22 +48,31 @@ subroutine searchdet(det,add,deth,addh)
     !C if det=0 then exit
     a=0
     i=0
-    count=0
-    if(a.eq.det)then
+    count=1
+    const=0
+    if(a.eq.foundadd(count,1))then
     add=1
     Return
     endif
 
     do while (i.le.(nt2))
-        if(a.eq.det)then
+        if(a.eq.foundadd(count,1))then
             if(a.eq.1)then
                add=i
-               count=-1
+               foundadd(count,2)=add
+               if(count.eq.detfound)then
+               const=-1
                EXIT
+               endif
+               count+=1
             else
                add=i
-               count=-1
+               foundadd(count,2)=add
+               if(count.eq.detfound)then
+               const=-1
                EXIT
+               endif
+               count+=1
             endif
         endif
 
@@ -70,8 +83,9 @@ subroutine searchdet(det,add,deth,addh)
             a+=1
         enddo
     enddo
-    if(a.eq.det .and. count.ne.-1)then
+    if(a.eq.foundadd(count,1) .and. const.ne.-1)then
     add=i-1
+    foundadd(count,2)=add
     endif
     
 

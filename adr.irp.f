@@ -8,13 +8,15 @@ subroutine adr(ideter,add)
     END_DOC
     integer,INTENT(INOUT)::ideter(natomax)
     integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
-    integer(kind=selected_int_kind(16))::det,i,deth,addh,detnew
-    integer::count
+    integer(kind=selected_int_kind(16))::det,deth,addh,detnew
+    integer::count,i,j
 
     det=0
     detnew=0
     deth=0
     count=0
+    do j=1,detfound
+    ideter=foundet(:,j)
     call conv(ideter,det,deth)
     Do i=0,natom-1
         if(BTEST(deth,i))then
@@ -25,8 +27,20 @@ subroutine adr(ideter,add)
         endif
     enddo
     det=detnew
-    call searchdet(det,add,deth,addh)
-    add = add + (2*nt1-addh)*(nt2)
+        foundadd(j,1)=det
+        foundadd(j,3)=j
+        foundaddh(j,1)=deth
+        foundaddh(j,3)=j
+    enddo
+    call sort()
+    call searchdet()
+    call desort()
+    do i=1,detfound
+        add = foundadd(i,2)
+        addh = foundaddh(i,2)
+        add = add + (2*nt1-addh)*(nt2)
+        foundetadr(i,2)=add
+    enddo
 
 
 10  FORMAT(B64,I8,F8.2)
