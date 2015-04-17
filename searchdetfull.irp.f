@@ -32,7 +32,9 @@ subroutine searchdetfull()
                         foundaddh(count,2)=addh
                         count+=1
                     enddo
-                    if(count.ge.detfound)EXIT
+                    if(count.gt.detfound)then
+                    EXIT
+                    endif
                 endif
 
                 i+=1
@@ -41,9 +43,10 @@ subroutine searchdetfull()
 !               do while(popcnt(a).ne.ntrou .or. const==1)
                 do while(popcnt(a).ne.ntrou)
                     a+=1
-                    const=0
+!                   const=0
                 enddo
             enddo
+
             if(a.eq.foundaddh(count,1))then
             addh=i-1
             foundaddh(count,2)=addh
@@ -65,6 +68,9 @@ subroutine searchdetfull()
     add=1
                foundadd(count,2)=add
                count+=1
+               do while(foundadd(count,1).eq.add .and. count.le.detfound)
+                foundadd(count,2)=add
+               enddo
     endif
 
     do while (i.le.(nt2))
@@ -80,11 +86,15 @@ subroutine searchdetfull()
             else
                add=i-1
                foundadd(count,2)=add
-               if(count.eq.detfound)then
+               count+=1
+               do while(foundadd(count,1).eq.a .and. count.le.detfound)
+                foundadd(count,2)=add
+                count+=1
+               enddo
+               if(count.gt.detfound)then
                const=-1
                EXIT
                endif
-               count+=1
             endif
         endif
 
@@ -95,8 +105,19 @@ subroutine searchdetfull()
             a+=1
         enddo
     enddo
-
-    
+!   if(a.eq.foundadd(count,1) .and. foundadd(count,1).eq.0)then
+    if(a.eq.foundadd(count,1) .and. foundadd(count,2) .eq. 0)then
+        foundadd(count,2) = nt2
+        count+=1
+               do while(foundadd(count,1).eq.a .and. count.le.detfound)
+                foundadd(count,2)=nt2
+                count+=1
+               enddo
+    endif
+!   do i=1,detfound
+!       write(6,16)foundadd(i,1) ,foundadd(i,2),foundadd(i,3)
+!       write(6,16)foundaddh(i,1),foundaddh(i,2),foundaddh(i,3)
+!   enddo
 
 10  FORMAT(B64,I8,F8.2)
 15  FORMAT(B64,I8,I8,I8)

@@ -15,6 +15,13 @@
 !----------boucle premier voisin
 
       allocate (ideter2(natomax))
+    
+      foundet=0
+      foundetadr=0
+      foundetdmat=0d0
+      detfound=0
+      foundadd=0
+      foundaddh=0
 
       count=0
       yw=.FALSE.
@@ -73,7 +80,7 @@
       enddo
 
       detfound=count
-      Touch foundet foundetadr detfound foundadd foundaddh
+      Touch foundet foundetadr detfound foundadd foundaddh foundetdmat
       call adrfull()
       do i=1,count
 	       imat4=iaa
