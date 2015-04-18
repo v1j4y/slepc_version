@@ -1,5 +1,4 @@
 BEGIN_PROVIDER [integer, natom]
-&BEGIN_PROVIDER [integer, ntrou]
 &BEGIN_PROVIDER [integer, natrest]
 &BEGIN_PROVIDER [integer, ial0]
 &BEGIN_PROVIDER [logical*1, yham]
@@ -30,8 +29,8 @@ BEGIN_PROVIDER [integer, natom]
       logical yplac(maxlien)
 !   integer,allocatable :: l1(:),l2(:),ktyp(:)
     integer :: ityp
-    real*8,allocatable :: xjjz(:),xjjxy(:)
-    real*8,allocatable :: xtt(:)
+!C  real*8,allocatable :: xjjz(:),xjjxy(:)
+!C  real*8,allocatable :: xtt(:)
     integer :: isz,iprec,maxda2,niter,ngao,nvec,numero,nes4
     integer :: ilien(natomax,natomax)
     integer :: nlien,ilien2(natomax,natomax)
@@ -62,11 +61,11 @@ BEGIN_PROVIDER [integer, natom]
       real*8 xeneperpT
       real*8 xenediagJ
       real*8 xenediagT
-    allocate (xtt(maxlien))
-    allocate (xjjz(maxlien))
-    allocate (xjjxy(maxlien))
+!C  allocate (xtt(maxlien))
+!C  allocate (xjjz(maxlien))
+!C  allocate (xjjxy(maxlien))
 
-    NAMELIST/hamilton/yham,FAM1,ntrou
+    NAMELIST/hamilton/yham,FAM1
     NAMELIST/clust/l1,l2,ktyp
     NAMELIST/integ/ityp,xjjz,xjjxy,xtt
     NAMELIST/param/xj1,xj2,xt1,xt2,xv1,xv2,xv3,xbJ,xbT,xeneperpJ, &
@@ -96,7 +95,6 @@ BEGIN_PROVIDER [integer, natom]
 
        FAM1=.TRUE.
        yham=.TRUE.
-       ntrou=1
        write(6,*)'HAMILTONIEN t-J'
        write(6,*)'Le nombre de trou est : ',ntrou
 !---------------------------------------------
@@ -205,9 +203,9 @@ BEGIN_PROVIDER [integer, natom]
 
 
       ityp=3
-      xjjz=(/.1000d0,-0.8d0,0.000d0/)
-      xjjxy=(/.1000d0,-0.8d0,0.000d0/)
-      xtt=(/-1.0000d0,0.d0,0.0d0/)
+!C    xjjz=(/.1000d0,-0.8d0,0.000d0/)
+!C    xjjxy=(/.1000d0,-0.8d0,0.000d0/)
+!C    xtt=(/-1.0000d0,0.d0,0.0d0/)
 
        write(6,*)'Nombre de J differents',ityp
        do ikl=1,nlientot

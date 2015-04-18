@@ -15,7 +15,7 @@ BEGIN_PROVIDER [integer, natomax]
     natomax=52
     jrangmax=10705432
     maxial=20
-    maxlien=42
+    maxlien=52
     maxplac=20
     maxdet=10000
 END_PROVIDER
