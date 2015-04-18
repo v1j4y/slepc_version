@@ -9,6 +9,7 @@ subroutine searchdet(det,add,deth,addh)
     integer(kind=selected_int_kind(16)),INTENT(INOUT)::add
     integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
     integer(kind=selected_int_kind(16)),INTENT(INOUT)::addh
+    integer(kind=selected_int_kind(16))::dethsh
     integer(kind=selected_int_kind(16))::a
     integer(kind=selected_int_kind(16))::i
     integer::const
@@ -20,12 +21,14 @@ subroutine searchdet(det,add,deth,addh)
     If(ntrou.ge.1)then
 
             const=0
-            a=0
+            dethsh = ISHFT(deth,-natom/2)
+!           a=(2**(ntrou)) - 1
+!           a = ISHFT(a,natom/2)
             addh=0
-            i=1
-            do while (i.le.(2*nt1))
-                if(a.eq.deth)then
-                    addh=i-2
+!           i=nt1
+            do while (i.le.(nt1))
+                if(a.eq.dethsh)then
+                    addh=i-1
                     EXIT
                 endif
 
@@ -35,8 +38,8 @@ subroutine searchdet(det,add,deth,addh)
                     a+=1
                 enddo
             enddo
-            if(a.eq.deth)then
-            addh=i-1
+            if(a.eq.dethsh .and. addh.eq.0)then
+            addh=nt1
             endif
 
     endif
@@ -80,6 +83,6 @@ subroutine searchdet(det,add,deth,addh)
 11  FORMAT(B64,I3,B64)
 12  FORMAT(I5,$)
 13  FORMAT(B64,B64)
-14  FORMAT(B64,I8)
+14  FORMAT(B64,I16)
 16  FORMAT(B64,I8,I8)
 end
