@@ -26,7 +26,7 @@ subroutine adr(ideter,add)
     enddo
     det=detnew
     call searchdet(det,add,deth,addh)
-        add = add + (2*nt1-addh)*(nt2)
+        add = add + (nt1-addh)*(nt2)
 
 
 10  FORMAT(B64,I8,F8.2)

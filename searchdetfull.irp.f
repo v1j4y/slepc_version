@@ -8,6 +8,7 @@ subroutine searchdetfull()
 !   integer(kind=selected_int_kind(16)),INTENT(INOUT)::foundetadr(maxlien,4)
     integer(kind=selected_int_kind(16))::add
 !   integer(kind=selected_int_kind(16)),INTENT(INOUT)::deth
+    integer(kind=selected_int_kind(16))::dethsh
     integer(kind=selected_int_kind(16))::addh
     integer(kind=selected_int_kind(16))::a
     integer(kind=selected_int_kind(16))::i
@@ -23,14 +24,17 @@ subroutine searchdetfull()
             a=0
             addh=0
             i=1
+            dethsh = ISHFT(foundaddh(count,1),-natom/2)
             do while (i.le.(2*nt1))
-                if(a.eq.foundaddh(count,1))then
+                if(a.eq.dethsh)then
                     addh=i-1
                     foundaddh(count,2)=addh
                     count+=1
-                    do while(count .le. detfound .and. a .eq. foundaddh(count,1))
+                    dethsh = ISHFT(foundaddh(count,1),-natom/2)
+                    do while(count .le. detfound .and. a .eq. dethsh)
                         foundaddh(count,2)=addh
                         count+=1
+                        dethsh = ISHFT(foundaddh(count,1),-natom/2)
                     enddo
                     if(count.gt.detfound)then
                     EXIT
@@ -51,9 +55,11 @@ subroutine searchdetfull()
             addh=i-1
             foundaddh(count,2)=addh
                     count+=1
+                    dethsh = ISHFT(foundaddh(count,1),-natom/2)
                     do while(count .le. detfound .and. a .eq. foundaddh(count,1))
                         foundaddh(count,2)=addh
                         count+=1
+                        dethsh = ISHFT(foundaddh(count,1),-natom/2)
                     enddo
             endif
 

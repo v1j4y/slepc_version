@@ -39,7 +39,7 @@ subroutine adrfull()
     do i=1,detfound
         add = foundadd(i,2)
         addh = foundaddh(i,2)
-        add = add + (2*nt1-addh)*(nt2)
+        add = add + (nt1-addh)*(nt2)
         foundetadr(i)=add
     enddo
 
