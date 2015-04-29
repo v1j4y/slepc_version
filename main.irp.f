@@ -4,14 +4,14 @@
         real*8,allocatable::txtt(:),txjjxy(:),txjjz(:)
         integer::i,tistart,tntrou
         real::t1,t2
-        real,allocatable::tval(:,:)
-        integer(kind=selected_int_kind(16)),allocatable::tcol(:,:)
-        integer(kind=selected_int_kind(16))::tcountcol
+        real,allocatable::tval(:)
+        integer(kind=selected_int_kind(16)),allocatable::tcol(:)
+        integer(kind=selected_int_kind(16)),dimension(2)::tcountcol
         allocate (tl1(maxlien))
         allocate (tl2(maxlien))
         allocate (tktyp(maxlien))
-        allocate (tcol(maxlien,2))
-        allocate (tval(maxlien,2))
+        allocate (tcol(maxlien))
+        allocate (tval(maxlien))
         allocate (txjjxy(maxlien))
         allocate (txjjz (maxlien))
         allocate (txtt  (maxlien))

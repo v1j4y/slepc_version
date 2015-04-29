@@ -1,12 +1,12 @@
-        subroutine extra_diag(iaa)
+        subroutine extra_diag(tistart)
         implicit none
 
-        integer(kind=selected_int_kind(16)) :: iaa,iaa2
+        integer(kind=selected_int_kind(16)) :: iaa,iaa2,tistart,tistart2
         integer(kind=selected_int_kind(16)) :: imat4,jmat4
-        integer :: i,ik,iik
-        integer :: ik1,ik2,IC,k,ikmax,ikmin,count
+        integer :: i,ik,iik,j
+        integer :: ik1,ik2,IC,k,ikmax,ikmin,count,count2,detfound2
         integer,allocatable :: ideter2(:)
-        real*8 :: dmat4
+        real*8 :: dmat4,xmat
         logical :: yw
 
 !---------------------------------------------------------------------
@@ -15,13 +15,29 @@
 !----------boucle premier voisin
 
       allocate (ideter2(natomax))
-    
       foundet=0
       foundetadr=0
       foundetdmat=0d0
       detfound=0
+      detfound2=0
       foundadd=0
       foundaddh=0
+      count=0
+      count2=1
+      tistart2=tistart
+
+      do j=1,3
+    
+            call getdet(tistart,ideter2)
+            deter=ideter2
+            ideter2=0
+            Touch deter
+!           call adr(deter,iaa)
+!           call elem_diag(xmat)
+!           countcol+=1
+!           col(countcol)=iaa
+!           val(countcol)=xmat*1.0d0
+            print *,(deter(ik),ik=1,natom)
 
       count=0
       yw=.FALSE.
@@ -42,8 +58,8 @@
    	       dmat4=xjz(ik)
                if(dmat4.ne.0d0)then
             count+=1
-            foundet(:,count)=ideter2
-            foundetdmat(count)=dmat4
+            foundet(:,detfound+count)=ideter2
+            foundetdmat(detfound+count)=dmat4
             endif
          endif
 	 if(ytrou(ik)) then
@@ -73,17 +89,40 @@
   	       dmat4=(xt(ik))*(-1)**(IC)
                if(dmat4.ne.0d0)then
             count+=1
-            foundet(:,count)=ideter2
-            foundetdmat(count)=dmat4
+            foundet(:,detfound+count)=ideter2
+            foundetdmat(detfound+count)=dmat4
             endif
          endif
       enddo
 
-      detfound=count
+      detfound+=count
+      countcolfull(j)=count
+            tistart=tistart+1
+
+    enddo
       Touch foundet foundetadr detfound foundadd foundaddh foundetdmat
       call adrfull()
-      do i=1,count
-	       imat4=iaa
+      do i=1,detfound
+            print *,'hi',detfound2,i,count2
+      if(i.eq.1 .or. i-1.eq.detfound2)then
+            call getdet(tistart2,ideter2)
+            deter=ideter2
+            ideter2=0
+            Touch deter
+            call adr(deter,iaa)
+            call elem_diag(xmat)
+            countcol+=1
+            col(countcol)=iaa
+            val(countcol)=xmat*1.0d0
+
+            tistart2+=1
+            detfound2+=countcolfull(count2)
+            if(i.ne.1)then
+            count2+=1
+            endif
+            print *,'hi-----',detfound2,i,count2
+        endif
+	       imat4=iaa+1
 	       jmat4=foundetadr(i)
                dmat4=foundetdmat(i)
                if(jmat4.le.(nt1*nt2) .and. dmat4 .ne. 0d0)then
@@ -92,6 +131,7 @@
                 val(countcol)=dmat4
               endif
         enddo
+
 
     return
     end

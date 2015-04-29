@@ -12,9 +12,10 @@
     integer :: kkio,kkiok,n,nz
     integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
-    integer(kind=selected_int_kind(16))::tcountcol,tistart
-    real,dimension(maxlien,2)::tval
-    integer(kind=selected_int_kind(16)),dimension(maxlien,2)::tcol
+    integer(kind=selected_int_kind(16)),dimension(2)::tcountcol
+    integer(kind=selected_int_kind(16))::tistart
+    real,dimension(maxlien)::tval
+    integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol
     real*8 :: xmat
         integer :: ik,imat4,iaa2,iik
         integer :: ik1,ik2,jmat4,IC,ikmax,ikmin
@@ -28,13 +29,6 @@
 !       allocate (tcol(natomax))
 !       allocate (tval(natomax))
 
-    do i=1,natomax
-        col(i)=0d0
-        val(i)=0d0
-    enddo
-        tval=0d0
-        tcol=0d0
-        tcountcol=0
         countcol=0
     unit_44=44
     unit_33=33
@@ -42,43 +36,42 @@
         xmat=0d0
         count=0
 
-        do j=0,1
-            tistart=tistart+j
+
+            do i=1,natomax
+                col(i)=0
+                val(i)=0d0
+                tval(i)=0d0
+                tcol(i)=0
+            enddo
+                tcountcol=0
+                countcol=0
+                xmat=0d0
+                count=0
+
+            tistart=tistart
             i=1+tistart/nt2
             k=1+mod(tistart , nt2)
 
-            call getdet(tistart,ideter2)
-            deter=ideter2
-            Touch deter
-            call adr(deter,iaa)
-            call elem_diag(xmat)
-            countcol+=1
-            col(countcol)=iaa
-            val(countcol)=xmat*1.0d0
+!           call getdet(tistart,ideter2)
+!           deter=ideter2
+!           Touch deter
+!           call adr(deter,iaa)
+!           call elem_diag(xmat)
+!           countcol+=1
+!           col(countcol)=iaa
+!           val(countcol)=xmat*1.0d0
 
-            call extra_diag(iaa)
+            call extra_diag(tistart)
 
-        tcountcol=countcol
+        tcountcol=countcolfull
         do i=1,maxlien
             if(col(i).ne.0)then
                 if(val(i) .ne. 0 .or. col(i).eq.tistart)then
-                    tcol(i,j)=col(i)
-                    tval(i,j)=val(i)
+                    tcol(i)=col(i)
+                    tval(i)=val(i)
                 endif
             endif
         enddo
-        print *,tistart
-        print *,(tcol(i,j),i=1,maxlien)
-    do i=1,natomax
-        col(i)=0d0
-        val(i)=0d0
-    enddo
-        tval=0d0
-        tcol=0d0
-        tcountcol=0
-        countcol=0
-        xmat=0d0
-        count=0
-
-        enddo
+        print *,tistart,countcol,(tcountcol(i),i=1,2)
+        print *,(tcol(i),i=1,maxlien)
     end
