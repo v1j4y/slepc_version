@@ -13,8 +13,8 @@
     integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
     integer(kind=selected_int_kind(16))::tcountcol,tistart
-    real,dimension(maxlien)::tval
-    integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol
+    real,dimension(maxlien,2)::tval
+    integer(kind=selected_int_kind(16)),dimension(maxlien,2)::tcol
     real*8 :: xmat
         integer :: ik,imat4,iaa2,iik
         integer :: ik1,ik2,jmat4,IC,ikmax,ikmin
@@ -29,11 +29,11 @@
 !       allocate (tval(natomax))
 
     do i=1,natomax
-        tval(i)=0d0
-        tcol(i)=0d0
         col(i)=0d0
         val(i)=0d0
     enddo
+        tval=0d0
+        tcol=0d0
         tcountcol=0
         countcol=0
     unit_44=44
@@ -42,6 +42,8 @@
         xmat=0d0
         count=0
 
+        do j=0,1
+            tistart=tistart+j
             i=1+tistart/nt2
             k=1+mod(tistart , nt2)
 
@@ -60,11 +62,23 @@
         do i=1,maxlien
             if(col(i).ne.0)then
                 if(val(i) .ne. 0 .or. col(i).eq.tistart)then
-                    tcol(i)=col(i)
-                    tval(i)=val(i)
+                    tcol(i,j)=col(i)
+                    tval(i,j)=val(i)
                 endif
             endif
         enddo
         print *,tistart
-        print *,(tcol(i),i=1,maxlien)
+        print *,(tcol(i,j),i=1,maxlien)
+    do i=1,natomax
+        col(i)=0d0
+        val(i)=0d0
+    enddo
+        tval=0d0
+        tcol=0d0
+        tcountcol=0
+        countcol=0
+        xmat=0d0
+        count=0
+
+        enddo
     end
