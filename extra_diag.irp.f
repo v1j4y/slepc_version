@@ -101,6 +101,7 @@
     enddo
       Touch foundet foundetadr detfound foundadd foundaddh foundetdmat
       call adrfull()
+
       do i=1,detfound
       if(i.eq.1 .or. i-1.eq.detfound2)then
             call getdet(tistart2,ideter2)
@@ -115,9 +116,9 @@
 
             tistart2+=1
             detfound2+=countcolfull(count2)
-            if(i.ne.1)then
+!           if(i.ne.1)then
             count2+=1
-            endif
+!           endif
         endif
 	       imat4=iaa+1
 	       jmat4=foundetadr(i)
