@@ -12,7 +12,7 @@
     integer :: kkio,kkiok,n,nz
     integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
-    integer(kind=selected_int_kind(16)),dimension(2)::tcountcol
+    integer(kind=selected_int_kind(16)),dimension(5)::tcountcol
     integer(kind=selected_int_kind(16))::tistart
     real,dimension(maxlien)::tval
     integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol

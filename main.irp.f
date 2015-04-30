@@ -6,7 +6,7 @@
         real::t1,t2
         real,allocatable::tval(:)
         integer(kind=selected_int_kind(16)),allocatable::tcol(:)
-        integer(kind=selected_int_kind(16)),dimension(2)::tcountcol
+        integer(kind=selected_int_kind(16)),dimension(5)::tcountcol
         allocate (tl1(maxlien))
         allocate (tl2(maxlien))
         allocate (tktyp(maxlien))
