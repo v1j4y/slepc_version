@@ -72,6 +72,6 @@
                 endif
             endif
         enddo
-        print *,tistart,countcol,(tcountcol(i),i=1,2)
+        print *,tistart,countcol,(tcountcol(i),i=1,5)
         print *,(tcol(i),i=1,maxlien)
     end

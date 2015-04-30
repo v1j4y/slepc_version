@@ -1,6 +1,6 @@
 BEGIN_PROVIDER[integer, col,(natomax)]
 &BEGIN_PROVIDER[integer, countcol]
-&BEGIN_PROVIDER[integer, countcolfull,(3)]
+&BEGIN_PROVIDER[integer, countcolfull,(5)]
     implicit none
     col=0d0
     countcol=0

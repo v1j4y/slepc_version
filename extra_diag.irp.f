@@ -26,7 +26,7 @@
       count2=1
       tistart2=tistart
 
-      do j=1,3
+      do j=1,5
     
             call getdet(tistart,ideter2)
             deter=ideter2
@@ -37,7 +37,6 @@
 !           countcol+=1
 !           col(countcol)=iaa
 !           val(countcol)=xmat*1.0d0
-            print *,(deter(ik),ik=1,natom)
 
       count=0
       yw=.FALSE.
@@ -103,7 +102,6 @@
       Touch foundet foundetadr detfound foundadd foundaddh foundetdmat
       call adrfull()
       do i=1,detfound
-            print *,'hi',detfound2,i,count2
       if(i.eq.1 .or. i-1.eq.detfound2)then
             call getdet(tistart2,ideter2)
             deter=ideter2
@@ -120,7 +118,6 @@
             if(i.ne.1)then
             count2+=1
             endif
-            print *,'hi-----',detfound2,i,count2
         endif
 	       imat4=iaa+1
 	       jmat4=foundetadr(i)
