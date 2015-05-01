@@ -26,7 +26,7 @@
       count2=1
       tistart2=tistart
 
-      do j=1,5
+      do j=1,22
     
             call getdet(tistart,ideter2)
             deter=ideter2

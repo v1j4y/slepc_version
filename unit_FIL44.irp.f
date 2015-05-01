@@ -12,7 +12,7 @@
     integer :: kkio,kkiok,n,nz
     integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
-    integer(kind=selected_int_kind(16)),dimension(5)::tcountcol
+    integer(kind=selected_int_kind(16)),dimension(22)::tcountcol
     integer(kind=selected_int_kind(16))::tistart
     real,dimension(maxlien)::tval
     integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol
@@ -72,6 +72,6 @@
                 endif
             endif
         enddo
-        print *,tistart,countcol,(tcountcol(i),i=1,5)
-        print *,(tcol(i),i=1,maxlien)
+!       print *,tistart,countcol,(tcountcol(i),i=1,10)
+!       print *,(tcol(i),i=1,maxlien)
     end

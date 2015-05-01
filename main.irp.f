@@ -6,7 +6,7 @@
         real::t1,t2
         real,allocatable::tval(:)
         integer(kind=selected_int_kind(16)),allocatable::tcol(:)
-        integer(kind=selected_int_kind(16)),dimension(5)::tcountcol
+        integer(kind=selected_int_kind(16)),dimension(22)::tcountcol
         allocate (tl1(maxlien))
         allocate (tl2(maxlien))
         allocate (tktyp(maxlien))
@@ -25,7 +25,7 @@
         tcol=0
         tval=0d0
         tntrou=1
-        do i= 1,1
+        do i=8410,8460,10
         istart = i
         tistart = istart
 !       tl1=(/1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,0,0,0,0,0,0,0,0/)
