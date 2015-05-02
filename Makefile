@@ -1,6 +1,6 @@
 IRPF90 = irpf90 --align=32 #-a -d# --no_directives #-d --align=32 #-a -d
 FC     = ifort -openmp
-FCFLAGS= -g -O3 -i8 -axAVX #-traceback -C #-heap-arrays
+FCFLAGS= -i8 -O3 -axAVX,SSE4.2 #-g -traceback -C #-heap-arrays
 
 SRC=
 OBJ=

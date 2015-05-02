@@ -7,13 +7,19 @@
     implicit none
     integer :: i,j,k,ia1,ia2,l,m,chcind,chcval,ii
     integer :: count,unit_44,unit_33
-    integer :: iat,nbtots,iaa
+    integer :: iat,nbtots
+    integer(kind=selected_int_kind(16))::iaa
     integer :: kkio,kkiok,n,nz
-    integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:),tl1(:),tl2(:),tktyp(:)
-    integer::tcountcol,tistart
-    real,dimension(32)::tval
-    integer,dimension(32)::tcol
+    integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
+    integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
+    integer(kind=selected_int_kind(16))::tcountcol,tistart
+    real,dimension(maxlien)::tval
+    integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol
     real*8 :: xmat
+        integer :: ik,imat4,iaa2,iik
+        integer :: ik1,ik2,jmat4,IC,ikmax,ikmin
+        real*8 :: dmat4
+        logical :: yw
     ! BEGIN_DOC
     ! provides unit of FIL33 & FIL44
     ! END_DOC
@@ -25,6 +31,8 @@
     do i=1,natomax
         tval(i)=0d0
         tcol(i)=0d0
+        col(i)=0d0
+        val(i)=0d0
     enddo
         tcountcol=0
         countcol=0
@@ -33,56 +41,30 @@
         nnk=0
         xmat=0d0
         count=0
-!            do i=1,nt1
-!               do k=1,nt2
 
-             i=1+tistart/nt2
-             k=1+mod(tistart , nt2)
-                   do kkio=1,natom
-                      deter(kkio)=2
-                   enddo
-                   do l=1,ntrou
-                      deter(idet1(l,i))=3
-                   enddo
-                   do m=1,natrest
-                      ideter2(m)=2
-                   enddo
-                   do n=1,ial0
-                      ideter2(idet2(n,k))=1
-                   enddo
-                   iat=0
-                   do kkio=1,natom
-                      if(deter(kkio).ne.3)then
-            	    iat=iat+1
-            	    deter(kkio)=ideter2(iat)
-                      endif
-                   enddo
-                   count+=1
+            i=1+tistart/nt2
+            k=1+mod(tistart , nt2)
 
-!                  if(count.eq.tistart)then
-                   print *,"i=",i,"k=",k,"count=",count
+            call getdet(tistart,ideter2)
+            deter=ideter2
+            Touch deter
+            call adr(deter,iaa)
+            call elem_diag(xmat)
+            countcol+=1
+            col(countcol)=iaa
+            val(countcol)=xmat*1.0d0
 
-                   Touch deter
-                   call adress(deter,iaa)
-                   call elem_diag(xmat)
-                    countcol+=1
-                    col(countcol)=iaa
-                    val(countcol)=xmat*1.0d0
-                    
-!                 endif
-
-!               enddo
-!            enddo
-             nnk+=rank
-!       close(33)
-!       close(44)
+            call extra_diag(iaa)
 
         tcountcol=countcol
-        do i=1,32
+        do i=1,maxlien
             if(col(i).ne.0)then
-            tcol(i)=col(i)-1
+                if(val(i) .ne. 0 .or. col(i).eq.tistart)then
+                    tcol(i)=col(i)
+                    tval(i)=val(i)
+                endif
             endif
-            tval(i)=val(i)
         enddo
-        print *,(tcol(i),i=1,32)
+        print *,tistart
+        print *,(tcol(i),i=1,maxlien)
     end

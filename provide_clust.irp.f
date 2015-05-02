@@ -1,8 +1,12 @@
 BEGIN_PROVIDER[integer,l1,   (maxlien)]
 &BEGIN_PROVIDER[integer,l2,  (maxlien)]
 &BEGIN_PROVIDER[integer,ktyp,(maxlien)]
+&BEGIN_PROVIDER [real*8, xtt  ,(maxlien)]
+&BEGIN_PROVIDER[real*8, xjjz ,(maxlien)]
+&BEGIN_PROVIDER[real*8, xjjxy,(maxlien)]
+&BEGIN_PROVIDER [integer, ntrou]
       implicit none
-      integer::i
+!     integer::i
 !       open(unit=11,file="l1.dat",form="formatted")
 !       open(unit=12,file="l2.dat",form="formatted")
 !       open(unit=13,file="ktyp.dat",form="formatted")
