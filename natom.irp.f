@@ -31,7 +31,7 @@ BEGIN_PROVIDER [integer, natom]
     integer :: ityp
 !C  real*8,allocatable :: xjjz(:),xjjxy(:)
 !C  real*8,allocatable :: xtt(:)
-    integer :: isz,iprec,maxda2,niter,ngao,nvec,numero,nes4
+    integer :: iprec,maxda2,niter,ngao,nvec,numero,nes4
     integer :: ilien(natomax,natomax)
     integer :: nlien,ilien2(natomax,natomax)
     real*8 xjxy(maxlien)
@@ -318,7 +318,7 @@ BEGIN_PROVIDER [integer, natom]
       iplac(1,kko),' ',iplac(2,kko),' ',iplac(3,kko),' et ',iplac(4,kko)
       enddo
 !===================================================================
-    isz=0
+!   isz=0
     IPREC=8
     maxda2=20
     NITER=280

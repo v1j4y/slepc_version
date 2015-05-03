@@ -2,7 +2,7 @@
         implicit none
         integer(kind=selected_int_kind(16)),allocatable::tl1(:),tl2(:),tktyp(:)
         real*8,allocatable::txtt(:),txjjxy(:),txjjz(:)
-        integer::i,tistart,tntrou
+        integer::i,tistart,tntrou,tisz
         real::t1,t2
         real,allocatable::tval(:)
         integer(kind=selected_int_kind(16)),allocatable::tcol(:)
@@ -25,7 +25,8 @@
         tcol=0
         tval=0d0
         tntrou=1
-        do i=50116,50204,22
+        tisz=0
+        do i=116,204,22
         istart = i
         tistart = istart
 !       tl1=(/1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,0,0,0,0,0,0,0,0/)
@@ -56,6 +57,7 @@
                      txtt  ,           &
                      tcountcol,        &
                      tntrou,           &
+                     tisz,             &
                      tcol,tval)
         t2=secnds(t1)
         print *,'time=',t2

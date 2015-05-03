@@ -5,6 +5,7 @@ BEGIN_PROVIDER[integer,l1,   (maxlien)]
 &BEGIN_PROVIDER[real*8, xjjz ,(maxlien)]
 &BEGIN_PROVIDER[real*8, xjjxy,(maxlien)]
 &BEGIN_PROVIDER [integer, ntrou]
+&BEGIN_PROVIDER [integer, isz]
       implicit none
 !     integer::i
 !       open(unit=11,file="l1.dat",form="formatted")
