@@ -74,21 +74,26 @@ subroutine searchdetfull()
     add=1
                foundadd(count,2)=add
                count+=1
-               do while(foundadd(count,1).eq.add .and. count.le.detfound)
+               do while(foundadd(count,1).eq.a .and. count.le.detfound)
                 foundadd(count,2)=add
+                count+=1
                enddo
     endif
 
-    do while (i.le.(nt2))
+    do while (i.le.(nt2) .and. count .le.detfound)
         if(a.eq.foundadd(count,1))then
             if(a.eq.1)then
-               add=i
+               add=i-1
                foundadd(count,2)=add
+               count+=1
+               do while(foundadd(count,1).eq.a .and. count.le.detfound)
+                foundadd(count,2)=add
+                count+=1
+               enddo
                if(count.eq.detfound)then
                const=-1
                EXIT
                endif
-               count+=1
             else
                add=i-1
                foundadd(count,2)=add

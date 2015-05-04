@@ -3,8 +3,8 @@
         integer(kind=selected_int_kind(16)),allocatable::tl1(:),tl2(:),tktyp(:)
         real*8,allocatable::txtt(:),txjjxy(:),txjjz(:)
         integer::i,tistart,tntrou,tisz
-        real::t1,t2
-        real,allocatable::tval(:)
+        real*8::t1,t2
+        real*8,allocatable::tval(:)
         integer(kind=selected_int_kind(16)),allocatable::tcol(:)
         integer(kind=selected_int_kind(16)),dimension(22)::tcountcol
         allocate (tl1(maxlien))
@@ -25,7 +25,7 @@
         tcol=0
         tval=0d0
         tntrou=4
-        tisz=8
+        tisz=9
         do i=1,22,22
         istart = i
         tistart = istart

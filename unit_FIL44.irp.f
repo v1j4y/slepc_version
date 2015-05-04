@@ -14,7 +14,7 @@
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
     integer(kind=selected_int_kind(16)),dimension(22)::tcountcol
     integer(kind=selected_int_kind(16))::tistart
-    real,dimension(maxlien)::tval
+    real*8,dimension(maxlien)::tval
     integer(kind=selected_int_kind(16)),dimension(maxlien)::tcol
     real*8 :: xmat
         integer :: ik,imat4,iaa2,iik
@@ -77,11 +77,16 @@
                     cexdiag+=1
                 elseif(cexdiag .eq. countcolfull(cdiag))then
                     cexdiag=0
+                    if(cdiag.lt.22)then
                     cdiag+=1
+                    endif
                     tistart2+=1
+                else
+                    cexdiag+=1
                 endif
             endif
         enddo
 !       print *,tistart,countcol,(tcountcol(i),i=1,22)
+!       print *,""
 !       print *,(tcol(i),i=1,maxlien)
     end

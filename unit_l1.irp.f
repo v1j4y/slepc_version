@@ -12,7 +12,7 @@
         implicit none
         integer,INTENT(INOUT)::tistart,tntrou,tisz
         integer::i
-        real,INTENT(INOUT)::tval(maxlien)
+        real*8,INTENT(INOUT)::tval(maxlien)
         integer(kind=selected_int_kind(16)),INTENT(INOUT)::tcol(maxlien)
         integer(kind=selected_int_kind(16)),INTENT(INOUT),dimension(22)::tcountcol
         integer(kind=selected_int_kind(16)),INTENT(INOUT)::tl1(maxlien),tl2(maxlien),tktyp(maxlien)

@@ -23,6 +23,10 @@ subroutine getdet(add,ideter)
     do while (i.le.(ib))
         const=1
         do while(popcnt(detb).ne.nbeta .or. const==1)
+            if(nbeta.eq.0)then
+                detb=0
+                EXIT
+            endif
             detb+=1
             const=0
         enddo
