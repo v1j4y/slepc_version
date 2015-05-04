@@ -5,11 +5,11 @@
     END_DOC
 
     implicit none
-    integer :: i,j,k,ia1,ia2,l,m,chcind,chcval,ii
+    integer :: i,j,k,ia1,ia2,l,m,chcind,chcval,ii,tistart2
     integer :: count,unit_44,unit_33
     integer :: iat,nbtots
     integer(kind=selected_int_kind(16))::iaa
-    integer :: kkio,kkiok,n,nz
+    integer :: kkio,kkiok,n,nz,cdiag,cexdiag
     integer,allocatable ::ideter1(:),ideter2(:),deti(:),detj(:)
     integer(kind=selected_int_kind(16)),dimension(maxlien) ::tl1,tl2,tktyp
     integer(kind=selected_int_kind(16)),dimension(22)::tcountcol
@@ -35,6 +35,9 @@
         nnk=0
         xmat=0d0
         count=0
+        cdiag=1
+        cexdiag=0
+        tistart2=tistart
 
 
             do i=1,natomax
@@ -66,12 +69,19 @@
         tcountcol=countcolfull
         do i=1,maxlien
             if(col(i).ne.0)then
-                if(val(i) .ne. 0 .or. col(i).eq.tistart)then
+                if(val(i) .ne. 0 .or. col(i).eq.tistart2)then
                     tcol(i)=col(i)
                     tval(i)=val(i)
                 endif
+                if(col(i).eq.tistart2)then
+                    cexdiag+=1
+                elseif(cexdiag .eq. countcolfull(cdiag))then
+                    cexdiag=0
+                    cdiag+=1
+                    tistart2+=1
+                endif
             endif
         enddo
-!       print *,tistart,countcol,(tcountcol(i),i=1,10)
+!       print *,tistart,countcol,(tcountcol(i),i=1,22)
 !       print *,(tcol(i),i=1,maxlien)
     end
