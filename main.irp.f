@@ -24,9 +24,9 @@
         tcountcol=0
         tcol=0
         tval=0d0
-        tntrou=4
-        tisz=9
-        do i=1,22,22
+        tntrou=1
+        tisz=0
+        do i=1,1173,23
         istart = i
         tistart = istart
         tl1=(/1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,0,0,0,0,0,0,0,0/)
@@ -62,5 +62,13 @@
         t2=secnds(t1)
         print *,'time=',t2
         enddo
-        
+
+!       deallocate (tl1)
+!       deallocate (tl2)
+!       deallocate (tktyp)
+!       deallocate (tcol)
+!       deallocate (tval)
+!       deallocate (txjjxy)
+!       deallocate (txjjz )
+!       deallocate (txtt  )
         end

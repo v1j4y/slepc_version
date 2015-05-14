@@ -12,10 +12,10 @@ BEGIN_PROVIDER [integer, natomax]
     END_DOC
 
     implicit none
-    natomax=400
+    natomax=700
     jrangmax=10705432
     maxial=20
-    maxlien=400
+    maxlien=700
     maxplac=20
     maxdet=10000
 END_PROVIDER

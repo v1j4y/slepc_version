@@ -86,7 +86,8 @@
                 endif
             endif
         enddo
-!       print *,tistart,countcol,(tcountcol(i),i=1,22)
+!       print *,tistart,countcol,(tcountcol(i),i=1,23)
 !       print *,""
 !       print *,(tcol(i),i=1,maxlien)
+    deallocate(ideter2)
     end
