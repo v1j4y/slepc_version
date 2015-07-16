@@ -1,4 +1,4 @@
-https://zenodo.org/badge/doi/10.5281/zenodo.20450.svg
+http://dx.doi.org/10.5281/zenodo.20450
 
 Double Exchange Hamiltonian
 ============================
