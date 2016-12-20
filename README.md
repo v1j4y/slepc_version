@@ -1,5 +1,8 @@
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.20450.svg)](http://dx.doi.org/10.5281/zenodo.20450)
 
+[ This is a beta release please refer to [DEHam](https://github.com/v1j4y/DEHam) for a complete version]
+=========================================================================================================
+
 Double Exchange Hamiltonian
 ============================
 
